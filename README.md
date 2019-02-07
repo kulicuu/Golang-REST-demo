@@ -22,9 +22,51 @@ After that I'll be using this for a ladder:
 Associated repo: [https://github.com/corylanou/tns-restful-json-api](https://github.com/corylanou/tns-restful-json-api)
 
 
+
+
+
+### Requirements and How-To-Run:
+
+If Docker-Compose is installed then `docker-compose up` from the project root directory should run it.
+
+I tested it with Postman.
+
+
+### Status :
+
+I'm pressed for time and pretty new to the Golang ecosystem, accordingly spent a lot of time initially getting the Docker and dev environment set up. Things to do yet:
+
+
+- CSV import/export
+- Testing framework : Usually I'd do the tests before or concurrent with the implementation, but in this case I'll need to research first in order to get a good configuration setup.
+- Database:  I'll probably add Redis to the Docker environment. For now the data is held in process memory.
+
+Otherwise, this is a complete -- if spartan -- REST/CRUD API for an address book.   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+______________________________________-
 ____________________________________
 
-Self-reminder:
+##### Self-reminder / Notes:
 
 
 Run the app with

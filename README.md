@@ -48,3 +48,7 @@ To get an interactive shell in on the docker container:
 (`<container name>` is currently `app`)
 
 _________________________
+
+
+
+curl -H "Content-Type: application/json" -d '{"name":"Tghimmmmmheyyy"}' http://localhost:8080/persons

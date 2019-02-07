@@ -18,4 +18,22 @@ var routes = Routes{
         "/",
         Index,
     },
+    Route{
+        "Persons List",
+        "GET",
+        "/persons",
+        PersonsList,
+    },
+    Route{
+        "Persons Create",
+        "POST",
+        "/persons",
+        PersonCreate,
+    },
+    Route{
+        "Person Read",
+        "GET",
+        "/persons/{personId}",
+        PersonRead,
+    },
 }

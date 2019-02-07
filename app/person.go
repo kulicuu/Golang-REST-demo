@@ -4,9 +4,11 @@ package main
 
 
 type Person struct {
-    Id          int         `json:"id"`
-    Name        string      `json:"name"`
-    Address     string      `json:"address"`
+    Id                  int         `json:"id"`
+    FirstName           string      `json:"firstname"`
+    LastName            string      `json:"lastname"`
+    EmailAddress        string      `json:"emailaddress"`
+    PhoneNumber         string      `json:"phonenumber"`
     // Created     time.time   `json:"time"`
 }
 

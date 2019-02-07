@@ -36,4 +36,10 @@ var routes = Routes{
         "/persons/{personId}",
         PersonRead,
     },
+    Route{
+        "Person Update",
+        "PUT",
+        "/persons/{personId}",
+        PersonUpdate,
+    },
 }

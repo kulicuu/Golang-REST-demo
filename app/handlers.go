@@ -36,6 +36,68 @@ func PersonFind(id int) Person {
     return Person{}
 }
 
+
+func PersonFindPnt(id int) (*Person, int) {
+    for i, p := range persons {
+        if p.Id == id {
+            return &p, i
+        }
+    }
+    return &(Person{}), -1
+}
+
+
+
+func PersonUpdate(w http.ResponseWriter, r *http.Request) {
+    vars := mux.Vars(r)
+    var personId int
+    var person Person
+    // var targetPerson *Person
+    var idx int
+    var err error
+
+    if personId, err = strconv.Atoi(vars["personId"]); err != nil {
+        panic(err)
+    }
+
+    _, idx = PersonFindPnt(personId)
+
+
+    body, err := ioutil.ReadAll(io.LimitReader(r.Body, 1048576))
+    if err != nil {
+        panic(err)
+    }
+    if err := r.Body.Close(); err != nil {
+        panic(err)
+    }
+    if err := json.Unmarshal(body, &person); err != nil {
+        w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+        w.WriteHeader(422) // unprocessable entity
+        if err := json.NewEncoder(w).Encode(err); err != nil {
+            panic(err)
+        }
+    }
+
+    fmt.Printf("%+v\n", persons)
+    persons[idx].FirstName = person.FirstName
+    persons[idx].LastName = person.LastName
+    persons[idx].EmailAddress = person.EmailAddress
+    persons[idx].PhoneNumber = person.PhoneNumber
+    fmt.Printf("%+v\n", persons)
+
+    // targetPerson2 := PersonFind(personId)
+    // fmt.Printf("111 %+v\n", *targetPerson)
+    // fmt.Printf("333 %+v\n", targetPerson2)
+
+
+    // fmt.Printf("%+v\n", person)
+    // fmt.Println("hello " + strconv.Itoa(personId))
+    // fmt.Println("hhehe " + persons[personId].Name)
+    // persons[personId].Name = "Barney"
+
+
+}
+
 func PersonRead(w http.ResponseWriter, r *http.Request) {
     vars := mux.Vars(r)
     var personId int

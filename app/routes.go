@@ -42,4 +42,10 @@ var routes = Routes{
         "/persons/{personId}",
         PersonUpdate,
     },
+    Route{
+        "Person Delete",
+        "DELETE",
+        "/persons/{personId}",
+        PersonDelete,
+    },
 }

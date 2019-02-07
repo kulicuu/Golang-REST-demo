@@ -46,13 +46,32 @@ func PersonFindPnt(id int) (*Person, int) {
     return &(Person{}), -1
 }
 
+func PersonDelete(w http.ResponseWriter, r *http.Request) {
+    vars := mux.Vars(r)
+    var personId int
+    // var person Person
+    var idx int
+    var err error
+
+    if personId, err = strconv.Atoi(vars["personId"]); err != nil {
+        panic(err)
+    }
+
+    _, idx = PersonFindPnt(personId)
+
+    persons[idx] = persons[len(persons) - 1]
+    persons[len(persons) - 1] = Person{}
+    persons = persons[:len(persons) - 1]
+
+    w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+    w.WriteHeader(http.StatusOK)
+}
 
 
 func PersonUpdate(w http.ResponseWriter, r *http.Request) {
     vars := mux.Vars(r)
     var personId int
     var person Person
-    // var targetPerson *Person
     var idx int
     var err error
 
@@ -78,24 +97,13 @@ func PersonUpdate(w http.ResponseWriter, r *http.Request) {
         }
     }
 
-    fmt.Printf("%+v\n", persons)
     persons[idx].FirstName = person.FirstName
     persons[idx].LastName = person.LastName
     persons[idx].EmailAddress = person.EmailAddress
     persons[idx].PhoneNumber = person.PhoneNumber
-    fmt.Printf("%+v\n", persons)
 
-    // targetPerson2 := PersonFind(personId)
-    // fmt.Printf("111 %+v\n", *targetPerson)
-    // fmt.Printf("333 %+v\n", targetPerson2)
-
-
-    // fmt.Printf("%+v\n", person)
-    // fmt.Println("hello " + strconv.Itoa(personId))
-    // fmt.Println("hhehe " + persons[personId].Name)
-    // persons[personId].Name = "Barney"
-
-
+    w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+    w.WriteHeader(http.StatusOK)
 }
 
 func PersonRead(w http.ResponseWriter, r *http.Request) {
